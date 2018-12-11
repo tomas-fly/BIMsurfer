@@ -12,39 +12,39 @@ define(["../lib/text"], function(text) {
         return name;
     };
     */
-    
+
     function BimServerModel(apiModel) {
-    	
+
         this.api = apiModel.bimServerApi;
         this.apiModel = apiModel;
         this.tree = null;
         this.treePromise = null;
-    
+
         this.getTree = function(args) {
-            
-            /* 
+
+            /*
             // TODO: This is rather tricky. Never know when the list of Projects is exhausted.
             // Luckily a valid IFC contains one and only one. Let's assume there is just one.
             var projectEncountered = false;
-            
+
             this.model.getAllOfType("IfcProject", false, function(project) {
                 if (projectEncountered) {
                     throw new Error("More than a single project encountered, bleh!");
                 }
                 console.log('project', project);
             });
-            
+
             */
-            
+
             var self = this;
-            
+
             return self.treePromise || (self.treePromise = new Promise(function(resolve, reject) {
-                
+
                 if (self.tree) {
                     resolve(self.tree);
-                }    
-				
-				var query = 
+                }
+
+				var query =
 					{
 						defines:{
 							Representation:{
@@ -113,10 +113,10 @@ define(["../lib/text"], function(text) {
 		            		type:"IfcPresentationLayerAssignment"
 		            	}]
 					};
-				
+
                 // Perform the download
-//				apiModel.query(query, function(o) {}).done(function(){		
-					
+//				apiModel.query(query, function(o) {}).done(function(){
+
 					// A list of entities that define parent-child relationships
 					var entities = {
 						'IfcRelDecomposes': 1,
@@ -125,11 +125,11 @@ define(["../lib/text"], function(text) {
 						'IfcRelFillsElement': 1,
 						'IfcRelVoidsElement': 1
 					}
-					
+
 					// Create a mapping from id->instance
 					var instance_by_id = {};
 					var objects = [];
-					
+
 					for (var e in apiModel.objects) {
 						// The root node in a dojo store should have its parent
 						// set to null, not just something that evaluates to false
@@ -188,11 +188,25 @@ define(["../lib/text"], function(text) {
 							}
 						}
 					});
-					
-					var make_element = function (o) {
-						return {name: o.Name, id: o.id, guid: o.GlobalId, parent: o.parent, gid: (o._rgeometry == null ? null : o._rgeometry._i)};
+
+					var getName = function (object) {
+						var name = null;
+						if (object.LongName != null && object.LongName !== '') {
+							name = object.LongName;
+						}
+						if (name == null && object.Name != null && object.Name !== '') {
+							name = object.Name;
+						}
+						if (name == null) {
+							name = 'neznáme';
+						}
+						return name;
 					};
-					
+
+					var make_element = function (o) {
+						return {name: getName(o), id: o.id, guid: o.GlobalId, parent: o.parent, gid: (o._rgeometry == null ? null : o._rgeometry._i)};
+					};
+
 					var fold = (function() {
 						var root = null;
 						return function(li) {
@@ -210,14 +224,14 @@ define(["../lib/text"], function(text) {
 							});
 							return root;
 					}})();
-					
+
 					resolve(self.tree = fold(data.map(make_element)));
 //				});
             }));
         };
-        
+
     }
-    
+
     return BimServerModel;
 
 });
