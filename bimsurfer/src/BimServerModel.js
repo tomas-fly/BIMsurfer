@@ -191,15 +191,11 @@ define(["../lib/text"], function(text) {
 
 					var getName = function (object) {
 						var name = null;
-						if (object.LongName != null) {
-							if (object.LongName != null && object.LongName !== '') {
-								name = object.LongName;
-							}
+						if (object.LongName != null && object.LongName !== '') {
+							name = object.LongName;
 						}
-						if (name == null) {
-							if (object.Name != null && object.Name !== '') {
-								name = object.Name;
-							}
+						if (name == null && object.Name != null && object.Name !== '') {
+							name = object.Name;
 						}
 						if (name == null) {
 							name = 'neznáme';
