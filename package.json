@@ -1,0 +1,15 @@
+{
+  "name": "bimsurfer",
+  "version": "0.0.50",
+  "description": "Bim Surfer package",
+  "main": "bimsurfer/src/BimSurfer.js",
+  "files": [
+    "bimsurfer/"
+  ],
+  "scripts": {
+    "copy-package": "xcopy bim*.tgz \"\\\\krosfs\\DIV41\\Oddelenie CENKROSplus\\NpmServer\\BimSurfer\\\" /f /sy",
+    "remove-package": "del *.tgz",
+    "package": "npm pack && npm run copy-package && npm run remove-package"
+  },
+  "license": "MIT"
+}
