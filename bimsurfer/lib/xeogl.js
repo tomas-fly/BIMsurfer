@@ -2574,19 +2574,19 @@ var Canvas2Image = (function () {
          * @param m
          */
         scaleMat4c:  function (x, y, z, m) {
-            
+
             m[0] *= x;
             m[4] *= y;
             m[8] *= z;
-            
+
             m[1] *= x;
             m[5] *= y;
             m[9] *= z;
-            
+
             m[2] *= x;
             m[6] *= y;
             m[10] *= z;
-            
+
             m[3] *= x;
             m[7] *= y;
             m[11] *= z;
@@ -7284,7 +7284,7 @@ var Canvas2Image = (function () {
 
      renderer.State
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      */
@@ -7318,7 +7318,7 @@ var Canvas2Image = (function () {
 
      renderer.Visibility
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @param cfg.visible {Boolean} Flag which controls visibility of the associated render objects.
@@ -7350,7 +7350,7 @@ var Canvas2Image = (function () {
 
      renderer.Mode
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @param cfg.pickable {Boolean} Flag which controls pickability of the associated render objects.
@@ -7369,7 +7369,7 @@ var Canvas2Image = (function () {
 
      renderer.Layer
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @param cfg.priority {Number} Layer render priority.
@@ -7385,7 +7385,7 @@ var Canvas2Image = (function () {
 
      renderer.Stage
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @param cfg.priority {Number} Stage render priority.
@@ -7401,7 +7401,7 @@ var Canvas2Image = (function () {
 
      renderer.DepthBuf
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @param cfg.clearDepth {Number} Clear depth
@@ -7418,7 +7418,7 @@ var Canvas2Image = (function () {
 
      renderer.ColorBuf
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @param cfg.blendEnabled {Boolean} Indicates if blending is enebled for
@@ -7435,7 +7435,7 @@ var Canvas2Image = (function () {
 
      renderer.Lights
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @param cfg.colorMask {Array of Object} The light sources
@@ -7451,7 +7451,7 @@ var Canvas2Image = (function () {
 
      renderer.PhongMaterial
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7466,7 +7466,7 @@ var Canvas2Image = (function () {
 
      renderer.Reflect
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7481,7 +7481,7 @@ var Canvas2Image = (function () {
 
      renderer.Transform
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7496,7 +7496,7 @@ var Canvas2Image = (function () {
 
      renderer.Billboard
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7527,7 +7527,7 @@ var Canvas2Image = (function () {
 
      renderer.RenderTarget
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7545,7 +7545,7 @@ var Canvas2Image = (function () {
 
      renderer.Clips
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7560,7 +7560,7 @@ var Canvas2Image = (function () {
 
      renderer.MorphTargets
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7575,7 +7575,7 @@ var Canvas2Image = (function () {
 
      renderer.Shader
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7590,7 +7590,7 @@ var Canvas2Image = (function () {
 
      renderer.ShaderParams
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7605,7 +7605,7 @@ var Canvas2Image = (function () {
 
      renderer.Texture
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7621,7 +7621,7 @@ var Canvas2Image = (function () {
 
      renderer.Fresnel
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7637,7 +7637,7 @@ var Canvas2Image = (function () {
 
      renderer.Geometry
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -7652,7 +7652,7 @@ var Canvas2Image = (function () {
 
      renderer.ProgramState
      @module xeogl
-     
+
      @constructor
      @param cfg {*} Configs
      @extends renderer.State
@@ -12078,27 +12078,49 @@ var Canvas2Image = (function () {
             var dummy; // Keeps Codacy happy
 
             dummy = this.view;
+            console.log(dummy.id);
             dummy = this.project;
+            console.log(dummy.id);
             dummy = this.camera;
+            console.log(dummy.id);
             dummy = this.clips;
+            console.log(dummy.id);
             dummy = this.colorTarget;
+            console.log(dummy.id);
             dummy = this.colorBuf;
+            console.log(dummy.id);
             dummy = this.depthTarget;
+            console.log(dummy.id);
             dummy = this.depthBuf;
+            console.log(dummy.id);
             dummy = this.visibility;
+            console.log(dummy.id);
             dummy = this.cull;
+            console.log(dummy.id);
             dummy = this.modes;
+            console.log(dummy.id);
             dummy = this.geometry;
+            console.log(dummy.id);
             dummy = this.layer;
+            console.log(dummy.id);
             dummy = this.lights;
+            console.log(dummy.id);
             dummy = this.material;
+            console.log(dummy.id);
             dummy = this.morphTargets;
+            console.log(dummy.id);
             dummy = this.reflect;
+            console.log(dummy.id);
             dummy = this.shader;
+            console.log(dummy.id);
             dummy = this.shaderParams;
+            console.log(dummy.id);
             dummy = this.stage;
+            console.log(dummy.id);
             dummy = this.transform;
+            console.log(dummy.id);
             dummy = this.viewport;
+            console.log(dummy.id);
         },
 
         // Called by each component that is created with this Scene as parent.
@@ -12341,7 +12363,7 @@ var Canvas2Image = (function () {
                     return this._ticksPerRender;
                 }
             },
-            
+
             /**
              * The number of times this Scene renders per frame.
              *
@@ -12425,7 +12447,7 @@ var Canvas2Image = (function () {
                     return this._clearEachPass;
                 }
             },
-            
+
 
             /**
              * The default projection transform provided by this Scene, which is
@@ -15839,7 +15861,7 @@ var Canvas2Image = (function () {
 
     "use strict";
 
-    // Ensures lazy-injected CSS only injected once  
+    // Ensures lazy-injected CSS only injected once
     var spinnerCSSInjected = false;
 
     xeogl.Spinner = xeogl.Component.extend({
@@ -15906,7 +15928,7 @@ var Canvas2Image = (function () {
                     value = value !== false;
 
                     this._textures = value;
-                    
+
                     /**
                      * Fired whenever this Spinner's  {{#crossLink "Spinner/textures:property"}}{{/crossLink}} property changes.
                      *
@@ -20183,7 +20205,7 @@ var Canvas2Image = (function () {
                 primitive: null, // WebGL enum
                 primitiveName: null, // String
 
-                // VBOs 
+                // VBOs
 
                 positions: null,
                 colors: null,
@@ -21627,7 +21649,7 @@ var Canvas2Image = (function () {
  {{#crossLink "TorusGeometry/arc:property"}}{{/crossLink}} properties.
  * Dynamically switch its primitive type between ````"points"````, ````"lines"```` and ````"triangles"```` at any time by
  updating its {{#crossLink "Geometry/primitive:property"}}{{/crossLink}} property.
- 
+
  ## Examples
 
 
@@ -22108,12 +22130,12 @@ var Canvas2Image = (function () {
  <a href="../../examples/#geometry_SphereGeometry"><img src="../../assets/images/screenshots/SphereGeometry.png"></img></a>
 
  ## Overview
- 
+
  * Dynamically modify a SphereGeometry's shape at any time by updating its {{#crossLink "SphereGeometry/center:property"}}{{/crossLink}}, {{#crossLink "SphereGeometry/radius:property"}}{{/crossLink}}, {{#crossLink "SphereGeometry/heightSegments:property"}}{{/crossLink}} and
  {{#crossLink "SphereGeometry/widthSegments:property"}}{{/crossLink}} properties.
  * Dynamically switch its primitive type between ````"points"````, ````"lines"```` and ````"triangles"```` at any time by
  updating its {{#crossLink "Geometry/primitive:property"}}{{/crossLink}} property.
- 
+
  ## Examples
 
 
@@ -22355,7 +22377,7 @@ var Canvas2Image = (function () {
                     return this._center;
                 }
             },
-            
+
             /**
              * The SphereGeometry's radius.
              *
@@ -24014,7 +24036,7 @@ xeogl.PathGeometry = xeogl.Geometry.extend({
  {{#crossLink "PlaneGeometry/zSegments:property"}}{{/crossLink}} properties.
  * Dynamically switch its primitive type between ````"points"````, ````"lines"```` and ````"triangles"```` at any time by
  updating its {{#crossLink "Geometry/primitive:property"}}{{/crossLink}} property.
- 
+
  ## Examples
 
  * [Textured PlaneGeometry](../../examples/#geometry_PlaneGeometry)
@@ -24078,7 +24100,7 @@ xeogl.PathGeometry = xeogl.Geometry.extend({
             this._super(cfg);
 
             this.center = cfg.center;
-            
+
             this.xSize = cfg.xSize;
             this.zSize = cfg.zSize;
 
@@ -27956,7 +27978,7 @@ xeogl.PathGeometry = xeogl.Geometry.extend({
         "scenes",
         "animations"
     ];
-	
+
 	var dontParse = {
 		"accessors": true,
 		"nodes": true,
@@ -28098,12 +28120,12 @@ xeogl.PathGeometry = xeogl.Geometry.extend({
                 var t0 = performance.now();
 
                 var success = true;
-                
+
 				var category = categoriesDepsOrder[this._state.categoryIndex];
                 var categoryFunction = this.handlers[category];
-				
+
 				while (this._state.categoryIndex !== -1) {
-					
+
 					// TK: Don't copy over all these items individually
 					if (dontParse[category]) {
 						this._stepToNextCategory();
@@ -28111,7 +28133,7 @@ xeogl.PathGeometry = xeogl.Geometry.extend({
 						categoryFunction = this.handlers[category];
 						continue;
 					}
-					
+
                     var categoryState = this._state.categoryState;
                     var keys = categoryState.keys;
                     if (!keys) {
@@ -28146,9 +28168,9 @@ xeogl.PathGeometry = xeogl.Geometry.extend({
                         this._stepToNextDescription();
                     }
                 }
-				
+
 				var dt = (performance.now() - t0) / 1000.;
-				
+
 				console.log("glTF parsed in " + dt + "s");
 
                 if (this.handleLoadCompleted) {
@@ -28761,7 +28783,7 @@ xeogl.GLTFLoaderUtils = Object.create(Object, {
                 return this._idPrefix + "#" + entryID;
             }
         },
-		
+
 		handlers: { value: {
 
             buffers: function (entryID, description, userInfo) {
@@ -28872,12 +28894,12 @@ xeogl.GLTFLoaderUtils = Object.create(Object, {
 
                 return true;
             },
-			
+
             lights: function (entryID, description, userInfo) {
                 log("light", entryID, description);
                 return true;
             },
-			
+
             meshes: function (entryID, description, userInfo) {
 
                 var mesh = [];
@@ -28891,7 +28913,7 @@ xeogl.GLTFLoaderUtils = Object.create(Object, {
                     log("MISSING_PRIMITIVES for mesh:" + entryID);
                     return false;
                 }
-				
+
 				var accessors = this._rootDescription.accessors;
 
                 for (var i = 0; i < primitivesDescription.length; i++) {
@@ -33912,11 +33934,11 @@ xeogl.GLTFLoaderUtils = Object.create(Object, {
                     if (this._state.active === value) {
                         return;
                     }
-                    
+
                     this._state.active = value;
 
                     this._renderer.imageDirty = true;
-                    
+
                     /**
                      * Fired whenever this DepthBuf's {{#crossLink "DepthBuf/active:property"}}{{/crossLink}} property changes.
                      * @event active
@@ -36307,7 +36329,7 @@ xeogl.GLTFLoaderUtils = Object.create(Object, {
             if (!this._center) {
                 this._center = xeogl.math.vec3();
             }
-            
+
             var aabb = this._getAABB ? this._getAABB() : null;
 
             if (aabb) {
@@ -36326,7 +36348,7 @@ xeogl.GLTFLoaderUtils = Object.create(Object, {
                 math.AABB3ToOBB3(this._aabb, this._obb);
                 math.OBB3ToSphere3(this._obb, this._sphere);
                 math.getSphere3Center(this._sphere, this._center);
-                
+
                 return;
             }
 
@@ -36364,7 +36386,7 @@ xeogl.GLTFLoaderUtils = Object.create(Object, {
                 math.AABB3ToOBB3(this._aabb, this._obb);
                 math.OBB3ToSphere3(this._obb, this._sphere);
                 math.getSphere3Center(this._sphere, this._center);
-                
+
                 return
             }
 
