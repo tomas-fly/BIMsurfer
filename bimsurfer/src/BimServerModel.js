@@ -190,17 +190,14 @@ define(["../lib/text"], function(text) {
 					});
 
 					var getName = function (object) {
-						var name = null;
-						if (object.LongName != null && object.LongName !== '') {
-							name = object.LongName;
-						}
-						if (name == null && object.Name != null && object.Name !== '') {
-							name = object.Name;
-						}
-						if (name == null) {
-							name = 'neznáme';
-						}
-						return name;
+						var longName = object.LongName;
+						var name = object.Name;
+
+						return (name) && (longName)
+							? name + " - " + longName
+							: (name)
+								? name
+								: longName;
 					};
 
 					var make_element = function (o) {
