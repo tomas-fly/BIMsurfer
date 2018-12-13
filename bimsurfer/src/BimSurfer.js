@@ -1,7 +1,7 @@
 window.BIMSERVER_VERSION = "1.5";
 
 define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./xeoViewer/xeoViewer", "./EventHandler"], function (Notifier, Model, PreloadQuery, GeometryLoader, xeoViewer, EventHandler, _BimServerApi) {
-	
+
     // Backwards compatibility
     var BimServerApi;
     if (_BimServerApi) {
@@ -9,7 +9,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 	} else {
         BimServerApi = window.BimServerClient;
 	}
-    
+
     function BimSurfer(cfg) {
 
         var self = this;
@@ -35,7 +35,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
         viewer.on("selection-changed", function() {
             self.fire("selection-changed", arguments);
         });
-        
+
         // This are arrays as multiple models might be loaded or unloaded.
         this._idMapping = {
             'toGuid': [],
@@ -67,7 +67,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 
             var notifier = new Notifier();
             var bimServerApi = new BimServerApi(params.bimserver, notifier);
-			
+
 			params.api = bimServerApi; // TODO: Make copy of params
 
             return self._initApi(params)
@@ -75,7 +75,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 				.then(self._getRevisionFromServer)
 				.then(self._loadFromAPI);
         };
-		
+
 		this._initApi = function(params) {
 			return new Promise(function(resolve, reject) {
 				params.api.init(function () {
@@ -83,7 +83,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 				});
 			});
 		};
-		
+
 		this._loginToServer = function (params) {
 			return new Promise(function(resolve, reject) {
 				if (params.token) {
@@ -97,7 +97,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 				}
 			});
 		};
-		
+
 		this._getRevisionFromServer = function (params) {
 			return new Promise(function(resolve, reject) {
 				if (params.roid) {
@@ -105,7 +105,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 				} else {
 					params.api.call("ServiceInterface", "getAllRelatedProjects", {poid: params.poid}, function(data) {
                         var resolved = false;
-                        
+
                         data.forEach(function(projectData) {
                             if (projectData.oid == params.poid) {
                                 params.roid = projectData.lastRevisionId;
@@ -118,7 +118,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                                 resolve(params);
                             }
                         });
-                        
+
                         if (!resolved) {
 							reject();
 						}
@@ -133,7 +133,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                 var oldProgress = 0;
                 return new Promise(function (resolve, reject) {
                     var m = viewer.loadglTF(params.src);
-                    m.on("loaded", function() {						
+                    m.on("loaded", function() {
 						viewer.scene.canvas.spinner.on('processes', function(n) {
 							if (n === 0) {
                                 viewer.viewFit({});
@@ -147,7 +147,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                                 self.fire("progress", [progress]);
                             }
                             oldProgress = progress;
-						});                        
+						});
                     });
                 });
             }
@@ -163,7 +163,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                         // TODO: Preload not necessary combined with the bruteforce tree
                         var fired = false;
 
-                        model.query(PreloadQuery,
+                        model.query(PreloadQuery.getQuery(params.schema),
                             function () {
                                 if (!fired) {
                                     fired = true;
@@ -179,7 +179,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
         };
 
         this._loadModel = function (model) {
-        
+
             model.getTree().then(function (tree) {
 
                 var oids = [];
@@ -194,17 +194,17 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                     }
                     oidToGuid[n.id] = n.guid;
                     guidToOid[n.guid] = n.id;
-                    
+
                     for (var i = 0; i < (n.children || []).length; ++i) {
                         visit(n.children[i]);
                     }
                 };
 
                 visit(tree);
-                
+
                 self._idMapping.toGuid.push(oidToGuid);
                 self._idMapping.toId.push(guidToOid);
-                
+
                 var models = {};
 
                 // TODO: Ugh. Undecorate some of the newly created classes
@@ -240,7 +240,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                 loader.start();
             });
         };
-        
+
         // Helper function to traverse over the mappings for individually loaded models
         var _traverseMappings = function(mappings) {
             return function(k) {
@@ -262,7 +262,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
         };
 
         /**
-         * Returns a list of guids (GlobalId) for the list of object ids (oid) 
+         * Returns a list of guids (GlobalId) for the list of object ids (oid)
          *
          * @param ids List of internal object ids from the BIMserver / glTF file
          */
@@ -306,7 +306,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
         this.setColor = function (params) {
             viewer.setColor(params);
         };
-		
+
 		/**
          * Sets opacity of objects specified by ids or entity type, e.g IfcWall.
          **
@@ -342,21 +342,21 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
         this.setCamera = function (params) {
             viewer.setCamera(params);
         };
-		
+
 		/**
          * Redefines light sources.
-         * 
+         *
          * @param params Array of lights {type: "ambient"|"dir"|"point", params: {[...]}}
 		 * See http://xeoengine.org/docs/classes/Lights.html for possible params for each light type
          */
 		this.setLights = function (params) {
 			viewer.setLights(params);
 		};
-		
-		
+
+
         /**
          * Returns light sources.
-         * 
+         *
          * @returns Array of lights {type: "ambient"|"dir"|"point", params: {[...]}}
          */
 		this.getLights = function () {
@@ -370,10 +370,10 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
         this.reset = function (params) {
             viewer.reset(params);
         }
-        
+
          /**
           * Returns a list of loaded IFC entity types in the model.
-          * 
+          *
           * @method getTypes
           * @returns {Array} List of loaded IFC entity types, with visibility flag
           */
