@@ -201,7 +201,14 @@ define(["../lib/text"], function(text) {
 					};
 
 					var make_element = function (o) {
-						return {name: getName(o), id: o.id, guid: o.GlobalId, parent: o.parent, gid: (o._rgeometry == null ? null : o._rgeometry._i)};
+						return {
+							name: getName(o),
+							id: o.id,
+							guid: o.GlobalId,
+							parent: o.parent,
+							gid: (o._rgeometry == null ? null : o._rgeometry._i),
+							ifcType: o._t
+						};
 					};
 
 					var fold = (function() {

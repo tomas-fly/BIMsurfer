@@ -1,6 +1,6 @@
 {
   "name": "bimsurfer",
-  "version": "0.0.50",
+  "version": "0.50.1",
   "description": "Bim Surfer package",
   "main": "bimsurfer/src/BimSurfer.js",
   "files": [
