@@ -15428,7 +15428,7 @@ var Canvas2Image = (function () {
         _createCanvas: function () {
 
             var canvasId = "xeogl-canvas-" + xeogl.math.createUUID();
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
 
             var style = div.style;
@@ -15457,7 +15457,7 @@ var Canvas2Image = (function () {
          */
         _createBackground: function () {
 
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
 
             var style = div.style;
@@ -15486,7 +15486,7 @@ var Canvas2Image = (function () {
          */
         _createOverlay: function () {
 
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
 
             var style = div.style;
@@ -15878,7 +15878,7 @@ var Canvas2Image = (function () {
 
             // Create spinner elements
 
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
             var style = div.style;
 
