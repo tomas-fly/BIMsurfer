@@ -192,9 +192,10 @@ define(["../lib/text"], function(text) {
 					var getName = function (object) {
 						var longName = object.LongName;
 						var name = object.Name;
+						var description = object.Description;
 
-						return (name) && (longName)
-							? name + " - " + longName
+						return (name) && ((longName) || (description))
+							? name + " - " + ((longName) ? longName : description)
 							: (name)
 								? name
 								: longName;
