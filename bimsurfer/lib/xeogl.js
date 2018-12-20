@@ -15298,9 +15298,6 @@ var Canvas2Image = (function () {
             this._createBackground();
             this._createOverlay();
 
-            this._resizeBackground();
-            this._resizeOverlay();
-
             // Get WebGL context
 
             this._initWebGL(cfg);
@@ -15358,9 +15355,6 @@ var Canvas2Image = (function () {
                     if (newWindowSize || newCanvasSize || newCanvasPos) {
 
                         self._spinner._adjustPosition();
-
-                        self._resizeBackground();
-                        self._resizeOverlay();
 
                         if (newCanvasSize) {
 
@@ -15428,7 +15422,7 @@ var Canvas2Image = (function () {
         _createCanvas: function () {
 
             var canvasId = "xeogl-canvas-" + xeogl.math.createUUID();
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
 
             var style = div.style;
@@ -15457,19 +15451,14 @@ var Canvas2Image = (function () {
          */
         _createBackground: function () {
 
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
 
             var style = div.style;
-            style.padding = "0";
-            style.margin = "0";
-            style.background = null;
-            style.backgroundImage = null;
-            style.float = "left";
             style.left = "0";
             style.top = "0";
-            style.width = "0px";
-            style.height = "0px";
+            style.width = "100%";
+            style.height = "100%";
             style.position = "absolute";
             style.opacity = 1;
             style["z-index"] = "-20000";
@@ -15486,18 +15475,15 @@ var Canvas2Image = (function () {
          */
         _createOverlay: function () {
 
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
 
             var style = div.style;
-            style.padding = "0";
-            style.margin = "0";
             style.background = "black";
-            style.float = "left";
             style.left = "0";
             style.top = "0";
-            style.width = "0px";
-            style.height = "0px";
+            style.width = "100%";
+            style.height = "100%";
             style.position = "absolute";
             style.opacity = 0;
             style["z-index"] = "100000";
@@ -15505,61 +15491,6 @@ var Canvas2Image = (function () {
             body.appendChild(div);
 
             this.overlay = div;
-        },
-
-        /** (Re)sizes the overlay DIV to the canvas size
-         * @private
-         */
-        _resizeOverlay: function () {
-
-            if (!this.canvas || !this.overlay) {
-                return;
-            }
-
-            var canvas = this.canvas;
-            var overlay = this.overlay;
-            var overlayStyle = overlay.style;
-
-            var xy = this._getElementXY(canvas);
-            overlayStyle["left"] = xy.x + "px";
-            overlayStyle["top"] = xy.y + "px";
-            overlayStyle["width"] = canvas.clientWidth + "px";
-            overlayStyle["height"] = canvas.clientHeight + "px";
-        },
-
-        /** (Re)sizes the background DIV to the canvas size
-         * @private
-         */
-        _resizeBackground: function () {
-
-            if (!this.canvas || !this._backgroundElement) {
-                return;
-            }
-
-            var canvas = this.canvas;
-            var background = this._backgroundElement;
-            var backgroundStyle = background.style;
-
-            var xy = this._getElementXY(canvas);
-            backgroundStyle["left"] = xy.x + "px";
-            backgroundStyle["top"] = xy.y + "px";
-            backgroundStyle["width"] = canvas.clientWidth + "px";
-            backgroundStyle["height"] = canvas.clientHeight + "px";
-        },
-
-        _getElementXY: function (e) {
-            var x = 0, y = 0;
-            while (e) {
-                x += (e.offsetLeft-e.scrollLeft);
-                y += (e.offsetTop-e.scrollTop);
-                e = e.offsetParent;
-            }
-
-            var bodyRect = document.body.getBoundingClientRect();
-            return {
-                x: (x - bodyRect.left),
-                y: (y - bodyRect.top)
-            };
         },
 
         /**
@@ -15878,7 +15809,7 @@ var Canvas2Image = (function () {
 
             // Create spinner elements
 
-            var body = document.getElementsByTagName("body")[0];
+            var body = document.getElementById("kros-viewer");
             var div = document.createElement('div');
             var style = div.style;
 
@@ -16013,7 +15944,8 @@ var Canvas2Image = (function () {
             }
             var node = document.createElement('style');
             node.innerHTML = this._spinnerCSS;
-            document.body.appendChild(node);
+            var viewer = document.getElementById("kros-viewer");
+            viewer.appendChild(node);
             spinnerCSSInjected = true;
         },
 
