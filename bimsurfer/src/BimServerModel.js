@@ -198,7 +198,7 @@ define(["../lib/text"], function(text) {
 							? name + " - " + ((longName) ? longName : description)
 							: (name)
 								? name
-								: longName;
+								: ((longName) ? longName : description);
 					};
 
 					var make_element = function (o) {
