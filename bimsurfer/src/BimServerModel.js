@@ -192,16 +192,24 @@ define(["../lib/text"], function(text) {
 					var getName = function (object) {
 						var longName = object.LongName;
 						var name = object.Name;
+						var description = object.Description;
 
-						return (name) && (longName)
-							? name + " - " + longName
+						return (name) && ((longName) || (description))
+							? name + " - " + ((longName) ? longName : description)
 							: (name)
 								? name
-								: longName;
+								: ((longName) ? longName : description);
 					};
 
 					var make_element = function (o) {
-						return {name: getName(o), id: o.id, guid: o.GlobalId, parent: o.parent, gid: (o._rgeometry == null ? null : o._rgeometry._i)};
+						return {
+							name: getName(o),
+							id: o.id,
+							guid: o.GlobalId,
+							parent: o.parent,
+							gid: (o._rgeometry == null ? null : o._rgeometry._i),
+							ifcType: o._t
+						};
 					};
 
 					var fold = (function() {
