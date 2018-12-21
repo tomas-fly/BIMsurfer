@@ -1,8 +1,9 @@
-define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./BimSurfer"], function(BimServerModel, PreloadQuery, BimServerGeometryLoader, BimSufer) {
+define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./BimSurfer", "./EventHandler"], function(BimServerModel, PreloadQuery, BimServerGeometryLoader, BimSufer, EventHandler) {
 
     function BimServerModelLoader(bimServerClient, bimSurfer) {
 
-    	var o = this;
+		var o = this;
+		EventHandler.call(this);
 
     	this.loadFullModel = function(apiModel){
     		return new Promise(function(resolve, reject) {
@@ -54,7 +55,7 @@ define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./Bi
             bimSurfer._idMapping.toId.push(guidToOid);
 
     		var viewer = bimSurfer.viewer;
-    		viewer.taskStarted();
+    		// viewer.taskStarted(); //zobrazenie progressbaru pre 3D model.
 
     		viewer.createModel(model.apiModel.roid);
 
@@ -63,11 +64,11 @@ define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./Bi
 	        loader.addProgressListener(function (progress, nrObjectsRead, totalNrObjects) {
 				if (progress == "start") {
 					console.log("Started loading geometries");
-//					self.fire("loading-started");
+					o.fire("loading-started");
 				} else if (progress == "done") {
 					console.log("Finished loading geometries (" + totalNrObjects + " objects received)");
-//					self.fire("loading-finished");
-	                viewer.taskFinished();
+					o.fire("loading-finished");
+	                // viewer.taskFinished(); //schovanie progressbaru pre 3D model.
 				}
 	        });
 
@@ -87,7 +88,7 @@ define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./Bi
     	}
     }
 
-    BimServerModelLoader.prototype = Object.create(BimServerModelLoader.prototype);
+    BimServerModelLoader.prototype = Object.create(EventHandler.prototype);
 
     return BimServerModelLoader;
 });
