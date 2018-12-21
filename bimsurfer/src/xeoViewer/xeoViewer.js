@@ -632,7 +632,12 @@ define([
                     changed = true;
                 }
                 var object_ = objects[id];
-                if (!object_) objects_by_guid[id].forEach(fn)
+                if (!object_) {
+                    if(objects_by_guid[id])
+                    {
+                        objects_by_guid[id].forEach(fn);
+                    }
+                }
                 else fn(object_);
             }
 
