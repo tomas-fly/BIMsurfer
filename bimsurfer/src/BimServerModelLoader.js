@@ -55,7 +55,7 @@ define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./Bi
             bimSurfer._idMapping.toId.push(guidToOid);
 
     		var viewer = bimSurfer.viewer;
-    		// viewer.taskStarted(); //zobrazenie progressbaru pre 3D model.
+    		viewer.taskStarted();
 
     		viewer.createModel(model.apiModel.roid);
 
@@ -68,7 +68,7 @@ define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./Bi
 				} else if (progress == "done") {
 					console.log("Finished loading geometries (" + totalNrObjects + " objects received)");
 					o.fire("loading-finished");
-	                // viewer.taskFinished(); //schovanie progressbaru pre 3D model.
+	                viewer.taskFinished();
 				}
 	        });
 
