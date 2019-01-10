@@ -1243,6 +1243,10 @@ define([
             return objects[id];
         };
 
+        this.getObjects = function() {
+            return objects;
+        };
+
         /**
          * Resets the state of this viewer to the state previously saved with #saveReset.
          * @param {*} params A mask which specifies which aspects of viewer state to reset.
