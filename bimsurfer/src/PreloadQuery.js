@@ -50,43 +50,8 @@ define(function () {
 					]
 				},
 				{
-					type: 'IfcRepresentation',
-					includeAllSubTypes: true
-				},
-				{
-					type: 'IfcProductRepresentation'
-				},
-				{
-					type: 'IfcPresentationLayerWithStyle'
-				},
-				{
 					type: 'IfcProduct',
 					includeAllSubTypes: true
-				},
-				{
-					type: 'IfcProductDefinitionShape'
-				},
-				{
-					type: 'IfcPresentationLayerAssignment'
-				},
-				{
-					type: 'IfcRelAssociatesClassification',
-					includes: [
-						{
-							type: 'IfcRelAssociatesClassification',
-							field: 'RelatedObjects'
-						},
-						{
-							type: 'IfcRelAssociatesClassification',
-							field: 'RelatingClassification'
-						}
-					]
-				},
-				{
-					type: 'IfcSIUnit'
-				},
-				{
-					type: 'IfcPresentationLayerAssignment'
 				}
 			]
 		};
@@ -136,55 +101,9 @@ define(function () {
 				},
 				{
 					type: {
-						name: 'IfcRepresentation',
-						includeAllSubTypes: true
-					}
-				},
-				{
-					type: {
-						name: 'IfcRepresentationItem',
-						includeAllSubTypes: true
-					}
-				},
-				{
-					type: {
-						name: 'IfcProductRepresentation',
-						includeAllSubTypes: true
-					}
-				},
-				{
-					type: 'IfcPresentationLayerWithStyle'
-				},
-				{
-					type: {
 						name: 'IfcProduct',
 						includeAllSubTypes: true
 					}
-				},
-				{
-					type: 'IfcProductDefinitionShape'
-				},
-				{
-					type: 'IfcPresentationLayerAssignment'
-				},
-				{
-					type: 'IfcRelAssociatesClassification',
-					includes: [
-						{
-							type: 'IfcRelAssociatesClassification',
-							field: 'RelatedObjects'
-						},
-						{
-							type: 'IfcRelAssociatesClassification',
-							field: 'RelatingClassification'
-						}
-					]
-				},
-				{
-					type: 'IfcSIUnit'
-				},
-				{
-					type: 'IfcPresentationLayerAssignment'
 				}
 			]
 		};
