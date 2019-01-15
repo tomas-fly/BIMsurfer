@@ -39,7 +39,7 @@ define(["../../../lib/xeogl"], function () {
             var rotateStartLook;
             var rotateStartUp = math.vec3();
 
-            var orbitPitchAxis = math.vec3([1, 0, 0]); // The current axis for vertical orbit  
+            var orbitPitchAxis = math.vec3([1, 0, 0]); // The current axis for vertical orbit
 
             var pickHit; // Hit record from the most recent pick
             var pickClicks = 0; // Number of times we've clicked on same spot on entity
@@ -119,7 +119,7 @@ define(["../../../lib/xeogl"], function () {
                     if (sceneSizeDirty) {
                         diag = math.getAABB3Diag(scene.worldBoundary.aabb);
                     }
-                    return diag;
+                    return Math.min(diag, 200.);
                 };
             })();
 
@@ -348,7 +348,7 @@ define(["../../../lib/xeogl"], function () {
             }
 
             var tempVecHover = math.vec3();
-            
+
             var updateHoverDistanceAndCursor = function(canvasPos) {
                 var hit = scene.pick({
                     canvasPos: canvasPos || lastCanvasPos,
@@ -380,7 +380,7 @@ define(["../../../lib/xeogl"], function () {
                     if (!mouseDown) {
 
                         updateHoverDistanceAndCursor(canvasPos);
-                        
+
                         lastCanvasPos[0] = canvasPos[0];
                         lastCanvasPos[1] = canvasPos[1];
 
@@ -443,7 +443,7 @@ define(["../../../lib/xeogl"], function () {
                         view.eye = math.addVec3(view.eye, tempVecHover);
                         view.look = math.addVec3(view.look, tempVecHover);
                     } else {
-                        // If not panning, we are orbiting                        
+                        // If not panning, we are orbiting
 
                         // Subtract camera space unproject points
                         math.subVec3(A[0], B[0], tempVecHover);
@@ -670,7 +670,7 @@ define(["../../../lib/xeogl"], function () {
 
             //---------------------------------------------------------------------------------------------------------
             // Mouse zoom
-            // Roll mouse wheel to move eye and look closer or further from center of rotationDeltas 
+            // Roll mouse wheel to move eye and look closer or further from center of rotationDeltas
             //---------------------------------------------------------------------------------------------------------
 
             (function () {
@@ -708,7 +708,7 @@ define(["../../../lib/xeogl"], function () {
                             newTarget = true;
                         }
                     });
-                    
+
                 var updateTimeout = null;
 
                 scene.on("tick",
@@ -725,7 +725,7 @@ define(["../../../lib/xeogl"], function () {
                         if (flying) {
                             return;
                         }
-                        
+
                         if (updateTimeout) {
                             clearTimeout(updateTimeout);
                         }
@@ -764,7 +764,7 @@ define(["../../../lib/xeogl"], function () {
 
                                 var eye = view.eye;
                                 var look = view.look;
-                                
+
                                 math.mulVec3Scalar(xeogl.math.transposeMat4(view.matrix).slice(8), f, eyePivotVec);
                                 math.addVec3(eye, eyePivotVec, newEye);
                                 math.addVec3(look, eyePivotVec, newLook);
@@ -791,7 +791,7 @@ define(["../../../lib/xeogl"], function () {
 
             //---------------------------------------------------------------------------------------------------------
             // Keyboard axis view
-            // Press 1,2,3,4,5 or 6 to view center of model from along an axis 
+            // Press 1,2,3,4,5 or 6 to view center of model from along an axis
             //---------------------------------------------------------------------------------------------------------
 
             (function () {
@@ -883,7 +883,7 @@ define(["../../../lib/xeogl"], function () {
 
             //---------------------------------------------------------------------------------------------------------
             // Keyboard pan camera
-            // Press W,S,A or D to pan the camera 
+            // Press W,S,A or D to pan the camera
             //---------------------------------------------------------------------------------------------------------
 
             scene.on("tick", (function () {
