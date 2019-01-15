@@ -117,9 +117,9 @@ define(["../../../lib/xeogl"], function () {
                 });
                 return function () {
                     if (sceneSizeDirty) {
-                        diag = math.getAABB3Diag(scene.worldBoundary.aabb);
+                        diag = Math.round(+math.getAABB3Diag(scene.worldBoundary.aabb));
                     }
-                    return Math.min(diag, 200.);
+                    return Math.min(diag, 200);
                 };
             })();
 
