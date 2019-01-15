@@ -24973,7 +24973,7 @@ xeogl.PathGeometry = xeogl.Geometry.extend({
                         e.preventDefault();
                     }
 
-                }, true);
+                }, { passive : false });
 
             document.addEventListener("keyup",
                 this._keyUpListener = function (e) {
